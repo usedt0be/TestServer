@@ -20,6 +20,11 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.koin.core)
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger)
+    implementation(libs.kmongo)
+    implementation(libs.kmongo.coroutine)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.websockets)
     implementation(libs.ktor.serialization.kotlinx.json)
