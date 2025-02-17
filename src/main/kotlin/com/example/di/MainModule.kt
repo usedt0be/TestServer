@@ -12,7 +12,7 @@ val mainModule = module {
     single {
         KMongo.createClient()
             .coroutine
-            .getDatabase("message_db_yt")
+            .getDatabase("messages_db")
     }
 
     single<MessageDataSource> {
