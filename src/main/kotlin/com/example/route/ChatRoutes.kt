@@ -1,6 +1,7 @@
 package com.example.route
 
 import com.example.API_VERSION
+import io.ktor.resources.*
 
 object ChatRoutes {
 
@@ -13,5 +14,15 @@ object ChatRoutes {
     private const val GET_DIALOG_CHAT = "$CHATS/dialog/{userId}"
 
 
+    @Resource(CHATS)
+    class Chats
 
+    @Resource(GET_MESSAGE_FOR_CHAT)
+    class GetMessagesForChat(val id: String)
+
+    @Resource(CHAT)
+    class Chat(val id: Int)
+
+    @Resource(GET_DIALOG_CHAT)
+    class getDialogChat(val userId: String)
 }
