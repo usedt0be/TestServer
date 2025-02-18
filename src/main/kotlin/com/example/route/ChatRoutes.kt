@@ -24,5 +24,5 @@ object ChatRoutes {
     class Chat(val id: Int)
 
     @Resource(GET_DIALOG_CHAT)
-    class getDialogChat(val userId: String)
+    class GetDialogChat(val userId: String)
 }
