@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
-const val API_VERSION = "/api/v1"
+
 
 fun Application.module() {
     install(Koin) {

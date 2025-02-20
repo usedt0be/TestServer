@@ -14,7 +14,7 @@ fun Application.configureSecurity() {
     intercept(Plugins) {
         if(call.sessions.get<ChatSession>() == null) {
             val username = call.parameters["username"] ?: "Guest"
-            call.sessions.set(ChatSession(username, generateNonce()))
+            call.sessions.set(ChatSession(username = username, sessionId = generateNonce()))
         }
     }
 

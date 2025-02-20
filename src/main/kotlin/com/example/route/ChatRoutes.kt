@@ -1,11 +1,10 @@
 package com.example.route
 
-import com.example.API_VERSION
 import io.ktor.resources.*
 
 object ChatRoutes {
 
-    private const val CHATS = "$API_VERSION/chats"
+    private const val CHATS = "/chats"
 
     private const val CHAT = "$CHATS/{id}"
 

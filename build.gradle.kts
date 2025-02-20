@@ -36,6 +36,8 @@ dependencies {
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.resources)
     implementation(libs.logback.classic)
+    //firebase
+    implementation(libs.firebase.admin)
 
 
     testImplementation(libs.ktor.server.test.host)
