@@ -12,5 +12,5 @@ interface ChatRepository {
 
     suspend fun getChatById(chatId: String): Chat
 
-    suspend fun updateChatWithMessage(message: Message, chatId: String, user1Id: String, user2Id: String)
+    suspend fun updateChatWithMessage(message: Message, chatId: String)
 }

@@ -35,10 +35,13 @@ dependencies {
     implementation(libs.ktor.server.sessions)
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.resources)
+    implementation(libs.ktor.server.auth)
     implementation(libs.logback.classic)
+
     //firebase
     implementation(libs.firebase.admin)
-
+    //hikari
+    implementation(libs.hikari)
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)

@@ -1,8 +1,9 @@
 package com.example
 
+import com.example.data.FirebaseAdmin
 import com.example.di.mainModule
+import com.example.plugins.*
 import io.ktor.server.application.*
-import io.ktor.server.websocket.*
 import org.koin.ktor.plugin.Koin
 
 fun main(args: Array<String>) {
@@ -12,9 +13,12 @@ fun main(args: Array<String>) {
 
 
 fun Application.module() {
+    FirebaseAdmin.init()
     install(Koin) {
         modules(mainModule)
     }
+
+    configureAuthentication()
     configureSockets()
     configureSerialization()
     configureSecurity()

@@ -1,4 +1,4 @@
-package com.example
+package com.example.plugins
 
 import com.example.session.ChatSession
 import io.ktor.server.application.*

@@ -3,7 +3,7 @@ package com.example.data.repository
 import com.example.data.model.Chat
 import com.example.data.model.Message
 import com.example.domain.ChatRepository
-import com.example.exception.NotFoundException
+import com.example.exception.AppException
 import com.mongodb.client.model.Filters
 import org.litote.kmongo.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
@@ -22,15 +22,20 @@ class ChatRepositoryImpl(
         return chat
     }
 
-    override suspend fun updateChatWithMessage(message: Message, chatId: String, user1Id: String, user2Id: String) {
-        chats.updateOne(
-            filter = Chat::chatId eq chatId,
-            update = push(Chat::messages, message)
-        )
+    override suspend fun updateChatWithMessage(message: Message, chatId: String) {
+        try {
+            getChatById(chatId)
+            chats.updateOne(
+                filter = Chat::chatId eq chatId,
+                update = push(Chat::messages, message)
+            )
+        } catch (e: AppException.NotFoundException) {
+            throw e
+        }
     }
 
     override suspend fun getMessagesForChat(chatId: String): List<Message> {
-        val chat = chats.findOne(chatId) ?: throw NotFoundException(message = "Chat not found")
+        val chat = chats.findOne(chatId) ?: throw AppException.NotFoundException(message = "Chat not found")
         val messages = chat.messages
         return messages
     }
@@ -55,7 +60,7 @@ class ChatRepositoryImpl(
     }
 
     override suspend fun getChatById(chatId: String): Chat {
-        val chat = chats.findOne(chatId) ?: throw NotFoundException(message = "Chat not found")
+        val chat = chats.findOne(chatId) ?: throw AppException.NotFoundException(message = "Chat not found")
         return chat
     }
 }

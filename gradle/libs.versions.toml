@@ -6,6 +6,8 @@ kmongo-version = "5.1.0"
 koin-version = "4.0.0"
 firebase-admin = "9.4.3"
 logback-version = "1.4.14"
+hikari = "4.0.2"
+
 
 
 [libraries]
@@ -19,6 +21,7 @@ ktor-server-resources = { module = "io.ktor:ktor-server-resources", version.ref 
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor-version" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
+ktor-server-auth = {module = "io.ktor:ktor-server-auth", version.ref = "ktor-version"}
 
 kmongo = { module = "org.litote.kmongo:kmongo", version.ref = "kmongo-version"}
 kmongo-coroutine = { module = "org.litote.kmongo:kmongo-coroutine", version.ref = "kmongo-version"}
@@ -30,6 +33,7 @@ koin-core = {module = "io.insert-koin:koin-core", version.ref = "koin-version"}
 
 firebase-admin = {module = "com.google.firebase:firebase-admin", version.ref = "firebase-admin"}
 
+hikari = {module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor-version" }

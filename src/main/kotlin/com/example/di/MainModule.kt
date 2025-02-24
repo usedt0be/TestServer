@@ -1,8 +1,11 @@
 package com.example.di
 
-import com.example.data.MessageDataSource
-import com.example.data.MessageDataSourceImpl
-import com.example.room.RoomController
+import com.example.data.messagedatasource_deprecated.MessageDataSource
+import com.example.data.messagedatasource_deprecated.MessageDataSourceImpl
+import com.example.data.repository.ChatRepositoryImpl
+import com.example.data.service.ChatInteractor
+import com.example.domain.ChatRepository
+import com.example.room_deprecated.RoomController
 import org.koin.dsl.module
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
@@ -23,5 +26,10 @@ val mainModule = module {
         RoomController(get())
     }
 
+    single<ChatInteractor> {
+        ChatInteractor(get())
+    }
+
+    single<ChatRepository> { ChatRepositoryImpl(get()) }
 
 }

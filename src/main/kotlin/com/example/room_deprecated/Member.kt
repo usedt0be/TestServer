@@ -1,4 +1,4 @@
-package com.example.room
+package com.example.room_deprecated
 
 import io.ktor.websocket.*
 
