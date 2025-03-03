@@ -4,6 +4,7 @@ import com.example.data.FirebaseAdmin
 import com.example.di.mainModule
 import com.example.plugins.*
 import io.ktor.server.application.*
+import io.ktor.server.resources.*
 import org.koin.ktor.plugin.Koin
 
 fun main(args: Array<String>) {
@@ -17,7 +18,7 @@ fun Application.module() {
     install(Koin) {
         modules(mainModule)
     }
-
+    configureResources()
     configureAuthentication()
     configureSockets()
     configureSerialization()

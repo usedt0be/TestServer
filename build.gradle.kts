@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -38,10 +37,14 @@ dependencies {
     implementation(libs.ktor.server.auth)
     implementation(libs.logback.classic)
 
-    //firebase
+    //firebase admin
     implementation(libs.firebase.admin)
     //hikari
     implementation(libs.hikari)
+
+
+    val slfj4_version = "2.0.5"
+    implementation("org.slf4j:slf4j-simple:$slfj4_version")
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
