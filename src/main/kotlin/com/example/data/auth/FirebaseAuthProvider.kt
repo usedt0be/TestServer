@@ -7,8 +7,11 @@ import io.ktor.http.auth.*
 import io.ktor.server.auth.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.slf4j.LoggerFactory
 
 class FirebaseAuthProvider(config: FirebaseAuthConfig) : AuthenticationProvider(config) {
+
+    val logger = LoggerFactory.getLogger("GetChatDialogLogger")
 
     private val authFunction = config.firebaseAuthFunction
 
@@ -17,7 +20,10 @@ class FirebaseAuthProvider(config: FirebaseAuthConfig) : AuthenticationProvider(
             val header = context.call.request.parseAuthorizationHeader()
                 ?: throw AppException.UnauthorizedException("Invalid token")
 
+            logger.info("$header")
+
             val token = verifyFirebaseIdToken(header) ?: throw AppException.UnauthorizedException("Invalid token")
+            logger.info("$token")
             val principal = authFunction(context.call, token) ?: throw AppException.UnauthorizedException("pizdec")
 
             context.principal(principal)

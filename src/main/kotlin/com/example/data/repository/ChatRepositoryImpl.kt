@@ -7,10 +7,13 @@ import com.example.exception.AppException
 import com.mongodb.client.model.Filters
 import org.litote.kmongo.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
+import org.slf4j.LoggerFactory
 
 class ChatRepositoryImpl(
     private val db: CoroutineDatabase
 ): ChatRepository {
+
+    val logger = LoggerFactory.getLogger("GetChatDialogLogger")
 
     private val chats = db.getCollection<Chat>()
 
@@ -41,22 +44,28 @@ class ChatRepositoryImpl(
     }
 
     override suspend fun getChatDialog(user1Id: String, user2Id: String): Chat {
-        chats.findOne(
-           filter = Filters.and(
-                Filters.eq(Chat::userIds.pos(0).toString(), user1Id),
-                Filters.eq(Chat::userIds.pos(1).toString(), user2Id),
-            )
-        ) ?: chats.findOne(
-            filter = Filters.and(
-                Filters.eq(Chat::userIds.pos(0).toString(), user2Id),
-                Filters.eq(Chat::userIds.pos(1).toString(), user1Id),
-            )
-        )?.let {
-            return it
-        }
+//        chats.findOne(
+//           filter = Filters.and(
+//                Filters.eq(Chat::userIds.pos(0).toString(), user1Id),
+//                Filters.eq(Chat::userIds.pos(1).toString(), user2Id),
+//            )
+//        ) ?: chats.findOne(
+//            filter = Filters.and(
+//                Filters.eq(Chat::userIds.pos(0).toString(), user2Id),
+//                Filters.eq(Chat::userIds.pos(1).toString(), user1Id),
+//            )
+//        )?.let {
+//            return it
+//        }
+        val chat = chats.findOne(filter = Filters.all("userIds", listOf(user1Id,user2Id)))
+        logger.info("chatMongo", "$chat")
 
-        val newChat = createChat(user1Id = user1Id, user2Id = user2Id)
-        return newChat
+        if (chat !== null) {
+            return chat
+        } else {
+            val newChat = createChat(user1Id = user1Id, user2Id = user2Id)
+            return newChat
+        }
     }
 
     override suspend fun getChatById(chatId: String): Chat {
