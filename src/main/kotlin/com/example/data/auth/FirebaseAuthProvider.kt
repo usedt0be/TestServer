@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
 
 class FirebaseAuthProvider(config: FirebaseAuthConfig) : AuthenticationProvider(config) {
 
-    val logger = LoggerFactory.getLogger("GetChatDialogLogger")
+    val authLogger = LoggerFactory.getLogger("AUTH_LOGGER")
 
     private val authFunction = config.firebaseAuthFunction
 
@@ -20,14 +20,16 @@ class FirebaseAuthProvider(config: FirebaseAuthConfig) : AuthenticationProvider(
             val header = context.call.request.parseAuthorizationHeader()
                 ?: throw AppException.UnauthorizedException("Invalid token")
 
-            logger.info("$header")
+            authLogger.info("$header")
 
             val token = verifyFirebaseIdToken(header) ?: throw AppException.UnauthorizedException("Invalid token")
-            logger.info("$token")
+            authLogger.info("$token")
             val principal = authFunction(context.call, token) ?: throw AppException.UnauthorizedException("pizdec")
 
             context.principal(principal)
         } catch (e: Exception) {
+            e.printStackTrace()
+            authLogger.info("$e")
            throw AppException.UnauthorizedException()
         }
     }
@@ -36,6 +38,7 @@ class FirebaseAuthProvider(config: FirebaseAuthConfig) : AuthenticationProvider(
     private suspend fun verifyFirebaseIdToken(header: HttpAuthHeader): FirebaseToken? {
         return if (header.authScheme == "Bearer" && header is HttpAuthHeader.Single) {
             withContext(Dispatchers.IO) {
+                authLogger.info("Token to verify: ${header?.blob}")
                 FirebaseAuth.getInstance().verifyIdToken(header.blob)
             }
         } else {

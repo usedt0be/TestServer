@@ -19,7 +19,7 @@ val mainModule = module {
     }
 
     single<MessageDataSource> {
-        MessageDataSourceImpl(get ())
+        MessageDataSourceImpl(get())
     }
 
     single {
@@ -30,6 +30,7 @@ val mainModule = module {
         ChatInteractor(get())
     }
 
-    single<ChatRepository> { ChatRepositoryImpl(get()) }
-
+    single<ChatRepository> {
+        ChatRepositoryImpl(get())
+    }
 }

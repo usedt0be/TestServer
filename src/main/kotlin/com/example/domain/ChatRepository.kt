@@ -6,11 +6,14 @@ import com.example.data.model.Message
 interface ChatRepository {
     suspend fun createChat(user1Id: String, user2Id:String): Chat
 
+    suspend fun getChats(userId: String): List<Chat>
+
     suspend fun getMessagesForChat(chatId: String): List<Message>
 
     suspend fun getChatDialog(user1Id: String, user2Id: String): Chat
 
     suspend fun getChatById(chatId: String): Chat
+
 
     suspend fun updateChatWithMessage(message: Message, chatId: String)
 }

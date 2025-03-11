@@ -12,6 +12,7 @@ object ChatRoutes {
 
     const val CHAT_WEBSOCKET = "$CHATS/{chatId}/ws"
 
+
     @Resource(CHATS)
     class Chats
 

@@ -11,12 +11,12 @@ fun Application.configureSecurity() {
         cookie<ChatSession>("SESSION")
     }
 
-    intercept(Plugins) {
-        if(call.sessions.get<ChatSession>() == null) {
-            val username = call.parameters["username"] ?: "Guest"
-            call.sessions.set(ChatSession(username = username, sessionId = generateNonce()))
-        }
-    }
+//    intercept(Plugins) {
+//        if(call.sessions.get<ChatSession>() == null) {
+//            val username = call.parameters["username"] ?: "Guest"
+//            call.sessions.set(ChatSession(username = username, sessionId = generateNonce()))
+//        }
+//    }
 
 }
 

@@ -13,7 +13,7 @@ class ChatRepositoryImpl(
     private val db: CoroutineDatabase
 ): ChatRepository {
 
-    val logger = LoggerFactory.getLogger("GetChatDialogLogger")
+    val logger = LoggerFactory.getLogger("Chat_REPOSITORY_logger")
 
     private val chats = db.getCollection<Chat>()
 
@@ -23,6 +23,12 @@ class ChatRepositoryImpl(
         )
         chats.insertOne(chat)
         return chat
+    }
+
+    override suspend fun getChats(userId: String): List<Chat> {
+        val chats = chats.find(Chat::userIds contains userId).toList()
+        logger.info("$chats")
+        return chats
     }
 
     override suspend fun updateChatWithMessage(message: Message, chatId: String) {

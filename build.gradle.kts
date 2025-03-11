@@ -42,7 +42,6 @@ dependencies {
     //hikari
     implementation(libs.hikari)
 
-
     val slfj4_version = "2.0.5"
     implementation("org.slf4j:slf4j-simple:$slfj4_version")
 

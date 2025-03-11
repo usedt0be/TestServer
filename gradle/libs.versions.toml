@@ -7,7 +7,7 @@ koin-version = "4.0.0"
 firebase-admin = "9.4.3"
 logback-version = "1.4.14"
 hikari = "4.0.2"
-#slfj4 = "2.0.5"
+slfj4 = "2.0.5"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor-version" }
@@ -31,7 +31,7 @@ koin-core = {module = "io.insert-koin:koin-core", version.ref = "koin-version"}
 
 firebase-admin = {module = "com.google.firebase:firebase-admin", version.ref = "firebase-admin"}
 
-#slf4j = {module = "org.slf4j:slf4j-simple", version.ref = "slf4j"}
+slf4j = {module = "org.slf4j:slf4j-simple", version.ref = "slf4j"}
 hikari = {module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 [plugins]
 

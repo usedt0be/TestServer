@@ -8,15 +8,20 @@ import com.example.util.getCurrentDateTime
 import com.example.util.toLong
 import io.ktor.util.collections.*
 import io.ktor.websocket.*
+import org.slf4j.LoggerFactory
+import java.util.*
+
+val interactorLogger = LoggerFactory.getLogger("interactor logger")
 
 class ChatInteractor(
     private val chatRepository: ChatRepository
 ) {
 
-    private val chatConnections = ConcurrentSet<ChatConnection>()
+    private val chatConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
 
 
     fun onConnectToChat(userId: String, chatId: String, session: WebSocketSession) {
+        interactorLogger.info("connection INVOKED")
         chatConnections.add(
             ChatConnection(
                 userId = userId,
@@ -38,6 +43,7 @@ class ChatInteractor(
 
 
     suspend fun sendMessage(messageText: String, chatId: String, senderId: String) {
+        interactorLogger.info("frame sended")
         val message = Message(
             senderId = senderId,
             text = messageText,
@@ -61,4 +67,6 @@ class ChatInteractor(
         val chat = chatRepository.getChatDialog(user1Id, user2Id)
         return chat
     }
+
+    suspend fun getChats(userId: String): List<Chat> = chatRepository.getChats(userId)
 }
