@@ -32,6 +32,7 @@ fun Route.chatSocket(
             try {
                 incoming.consumeEach { frame ->
                     if(frame is Frame.Text) {
+                        DialogLogger.info("TEXT IS : ${frame.readText()}")
                         chatInteractor.sendMessage(
                             messageText = frame.readText(),
                             senderId = ownId,

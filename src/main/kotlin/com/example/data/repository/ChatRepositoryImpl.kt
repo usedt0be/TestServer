@@ -33,7 +33,7 @@ class ChatRepositoryImpl(
 
     override suspend fun updateChatWithMessage(message: Message, chatId: String) {
         try {
-            getChatById(chatId)
+            //getChatById(chatId)
             chats.updateOne(
                 filter = Chat::chatId eq chatId,
                 update = push(Chat::messages, message)

@@ -1,12 +1,12 @@
 package com.example.data.service
 
 import com.example.data.model.Chat
+import com.example.data.model.ChatSession
 import com.example.data.model.Message
 import com.example.domain.ChatRepository
 import com.example.exception.AppException
 import com.example.util.getCurrentDateTime
 import com.example.util.toLong
-import io.ktor.util.collections.*
 import io.ktor.websocket.*
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -18,6 +18,17 @@ class ChatInteractor(
 ) {
 
     private val chatConnections = Collections.synchronizedSet<ChatConnection?>(LinkedHashSet())
+
+
+    private val chatTestConnection = Collections.synchronizedSet<ChatSession>(LinkedHashSet())
+    fun onJoinToTestChat(
+        username: String,
+        sessionId: String,
+        socket: WebSocketSession
+    ) {
+        interactorLogger.info("connection INVOKED")
+        chatTestConnection += ChatSession(username = username, sessionId = sessionId, socket = socket)
+    }
 
 
     fun onConnectToChat(userId: String, chatId: String, session: WebSocketSession) {

@@ -12,6 +12,8 @@ object ChatRoutes {
 
     const val CHAT_WEBSOCKET = "$CHATS/{chatId}/ws"
 
+    const val CHAT_SOCKET_TEST = "/chat-socket"
+
 
     @Resource(CHATS)
     class Chats
@@ -24,4 +26,7 @@ object ChatRoutes {
 
     @Resource(GET_DIALOG_CHAT)
     class GetDialogChat(val userId: String)
+
+    @Resource(CHAT_SOCKET_TEST)
+    class ChatSocket
 }
