@@ -1,8 +1,11 @@
-package com.example.room
+package com.example.data.model
 
 import io.ktor.websocket.*
+import kotlinx.serialization.Serializable
 
-data class Member(
+
+@Serializable
+data class ChatSession(
     val username: String,
     val sessionId: String,
     val socket: WebSocketSession
