@@ -1,4 +1,4 @@
-package com.example.data
+package com.example.data.messagedatasource_deprecated
 
 import com.example.data.model.Message
 import org.litote.kmongo.coroutine.CoroutineDatabase
