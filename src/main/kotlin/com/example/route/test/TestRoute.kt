@@ -1,4 +1,4 @@
-package com.example.route
+package com.example.route.test
 
 import com.example.data.service.ChatInteractor
 import com.example.exception.AppException
