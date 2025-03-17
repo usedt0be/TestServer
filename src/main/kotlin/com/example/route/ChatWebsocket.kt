@@ -21,7 +21,9 @@ fun Route.chatSocket(
                 ?: throw AppException.BadRequestException(message = "Chat id was not passed")
 
             val ownId = call.userId() ?: throw AppException.AuthenticationException(message = "Own user id not passed")
-            DialogLogger.info("$ownId")
+            socketLogger.info("OWN ID", "$ownId")
+            DialogLogger.info("CHAT CONNECTION INFO $ownId, session : ${this.toString()}")
+
             chatInteractor.onConnectToChat(
                 userId = ownId,
                 chatId = chatId,
@@ -41,6 +43,7 @@ fun Route.chatSocket(
                     }
                 }
             } catch (e:Exception) {
+                socketLogger.info("ERRRRORR  : $e")
                 e.printStackTrace()
             } finally {
                 chatInteractor.onDisconnectFromChat(

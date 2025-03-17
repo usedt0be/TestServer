@@ -6,7 +6,7 @@ object ChatRoutes {
     private const val CHATS = "/chats"
     private const val CHAT = "$CHATS/{id}"
 
-    private const val GET_MESSAGE_FOR_CHAT = "$CHATS/{id}/messages"
+    private const val GET_MESSAGE_FOR_CHAT = "$CHATS/{chatId}/messages"
 
     private const val GET_DIALOG_CHAT = "$CHATS/dialog/{userId}"
 
@@ -19,7 +19,7 @@ object ChatRoutes {
     class Chats
 
     @Resource(GET_MESSAGE_FOR_CHAT)
-    class GetMessagesForChat(val id: String)
+    class GetMessagesForChat(val chatId: String)
 
     @Resource(CHAT)
     class Chat(val id: Int)
